@@ -1,0 +1,29 @@
+.book__header {
+    display: block;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 60px;
+}
+
+.navbar__buttons {
+    display: flex;
+}
+
+.navbar__buttons .btn {
+    margin: 0 7px;
+}
+
+.navbar__img__content>img {
+    width: 80px;
+}
+
+.navbar__buttons__content {
+    margin-top: 13px;
+}
+
+.book__header {
+    border-bottom: 1px solid var(--color-primary-variant);
+}
