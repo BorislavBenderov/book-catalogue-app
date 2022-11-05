@@ -1,5 +1,6 @@
 import React from 'react';
 import BOOK from '../../assets/book.png';
+import BOOK1 from '../../assets/book-main.jpg';
 import './Header.css';
 
 export const Header = () => {
@@ -20,6 +21,13 @@ export const Header = () => {
                     </ul>
                 </article>
             </nav>
+
+            <section className="book__section">
+                <article className="book__section__img__content">
+                    <img src={BOOK1} alt="fancy book img" className='section__img' />
+                </article>
+                <h1 className='book__section__main__text'>Welcome to the world of Books</h1>
+            </section>
         </header>
     );
 }

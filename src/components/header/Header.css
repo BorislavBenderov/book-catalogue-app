@@ -5,7 +5,7 @@
 .navbar {
     display: flex;
     justify-content: space-between;
-    margin: 20px 60px;
+    margin: 0 200px;
 }
 
 .navbar__buttons {
@@ -24,6 +24,27 @@
     margin-top: 13px;
 }
 
-.book__header {
-    border-bottom: 1px solid var(--color-primary-variant);
+.book__section {
+    position: relative;
+}
+
+.book__section__text__content {
+    position: absolute;
+    top: 600px;
+    right: 40%;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+}
+
+.section__img {
+    opacity: 0.7;
+    height: 700px;
+}
+
+.book__section__main__text {
+    color: var(--color-bg-variant);
+    position: absolute;
+    top: 600px;
+    margin-left: 582px;
+    
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
 }
