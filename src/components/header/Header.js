@@ -1,10 +1,14 @@
-import React from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 import BOOK from '../../assets/book.png';
 import BOOK1 from '../../assets/book-main.jpg';
 import './Header.css';
 
 export const Header = () => {
+    const { loggedUser } = useContext(AuthContext);
+    const isLogged = loggedUser.accessToken;
+
     return (
         <header className="book__header">
             <nav className="navbar">
@@ -14,11 +18,12 @@ export const Header = () => {
 
                 <article className="navbar__buttons__content">
                     <ul className='navbar__buttons'>
-                        <li><Link className='btn' to="/login">Login</Link></li>
-                        <li><Link className='btn' to="/register">Register</Link></li>
-                        <li><Link className='btn' to="/mybooks">My Books</Link></li>
-                        <li><Link className='btn' to="/create">Add Book</Link></li>
-                        <li><Link className='btn' to="#">Logout</Link></li>
+                        {!isLogged
+                            ? <> <li><Link className='btn' to="/login">Login</Link></li>
+                                <li><Link className='btn' to="/register">Register</Link></li></>
+                            : <> <li><Link className='btn' to="/mybooks">My Books</Link></li>
+                                <li><Link className='btn' to="/create">Add Book</Link></li>
+                                <li><Link className='btn' to="#">Logout</Link></li></>}
                     </ul>
                 </article>
             </nav>
