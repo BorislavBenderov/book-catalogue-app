@@ -7,13 +7,14 @@ import { Login } from './components/login/Login';
 import { Register } from './components/register/Register';
 import { CreateBook } from './components/create-book/CreateBook';
 import { MyBooks } from './components/my-books/MyBooks';
+import { Details } from './components/details/Details';
 
 export const App = () => {
   return (
     <>
     <Header />
     <main className="site__content">
-      <MyBooks />
+      <Details />
     </main>
     <Footer />
     </>
