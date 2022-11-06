@@ -68,7 +68,7 @@ export const Dashboard = () => {
           </a>
         </li>
       </ul>
-      <p className="no-books">No books in database!</p>
+      <p className="no__books">No books in database!</p>
     </section>
 
   );
