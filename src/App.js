@@ -1,4 +1,4 @@
-
+import { Routes, Route } from 'react-router-dom';
 
 import { Header } from './components/header/Header';
 import { Dashboard } from './components/dashboard/Dashboard';
@@ -15,7 +15,15 @@ export const App = () => {
     <>
     <Header />
     <main className="site__content">
-      <Edit />
+      <Routes>
+        <Route path='/' element={<Dashboard />}/>
+        <Route path='/login' element={<Login />}/>
+        <Route path='/register' element={<Register />}/>
+        <Route path='/edit/:bookId' element={<Edit />}/>
+        <Route path='/details/:bookId' element={<Details />}/>
+        <Route path='/create' element={<CreateBook />}/>
+        <Route path='/mybooks' element={<MyBooks />}/>
+      </Routes>
     </main>
     <Footer />
     </>

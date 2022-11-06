@@ -5,7 +5,7 @@
 .navbar {
     display: flex;
     justify-content: space-between;
-    margin: 0 200px;
+    margin: 13px 200px;
 }
 
 .navbar__buttons {
@@ -14,14 +14,6 @@
 
 .navbar__buttons .btn {
     margin: 0 7px;
-}
-
-.navbar__img__content>img {
-    width: 80px;
-}
-
-.navbar__buttons__content {
-    margin-top: 13px;
 }
 
 .book__section {
