@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { BookContext } from '../../contexts/BookContext';
 import './Details.css';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export const Details = () => {
     const { bookId } = useParams();
@@ -24,7 +24,7 @@ export const Details = () => {
                     </div>
                 </article>
                 <div className="actions">
-                    <a href="" className="btn">Edit</a>
+                    <Link to={`/edit/${currentBook.id}`} className="btn">Edit</Link>
                     <a href="" className="btn">Delete</a>
                 </div>
             </div>

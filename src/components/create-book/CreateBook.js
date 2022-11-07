@@ -1,11 +1,12 @@
-import React from 'react';
 import './CreateBook.css';
+import { useNavigate } from 'react-router-dom';
 
 import { collection, addDoc } from 'firebase/firestore';
 import { app, database } from '../../firebaseConfig';
 
 export const CreateBook = () => {
     const collectionRef = collection(database, 'books');
+    const navigate = useNavigate();
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -15,15 +16,16 @@ export const CreateBook = () => {
         const description = formData.get('description');
         const imageUrl = formData.get('imageUrl');
         const type = formData.get('type');
-        
-        addDoc(collectionRef, {
+        const bookData = {
             title,
             description,
             imageUrl,
             type
-        })
+        };
+        
+        addDoc(collectionRef, bookData)
         .then(() => {
-            alert('Data Added');
+            navigate('/');
         })
         .catch((err) => {
             alert(err.message);

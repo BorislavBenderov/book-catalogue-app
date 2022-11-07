@@ -3,7 +3,7 @@ import { AuthContext } from './contexts/AuthContext';
 import { BookContext } from './contexts/BookContext';
 
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 import { database } from './firebaseConfig';
 
 import { Header } from './components/header/Header';
@@ -19,18 +19,18 @@ import { useEffect, useState } from 'react';
 
 export const App = () => {
   const [books, setBooks] = useState([]);
-  const navigate = useNavigate();
   const [loggedUser, setLoggedUser] = useState([]);
+
+  const navigate = useNavigate();
   const collectionRef = collection(database, 'books');
 
   useEffect(() => {
-    getDocs(collectionRef)
-      .then(response => {
-        setBooks(response.docs.map(item => {
-          return { ...item.data(), id: item.id };
-        }))
-      })
-  }, [])
+    onSnapshot(collectionRef, (data) => {
+      setBooks(data.docs.map(item => {
+        return { ...item.data(), id: item.id };
+      }))
+    })
+    }, []);
 
   const onLogin = (auth, email, password) => {
     signInWithEmailAndPassword(auth, email, password)
