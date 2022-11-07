@@ -1,13 +1,28 @@
 import { useContext } from 'react';
 import { BookContext } from '../../contexts/BookContext';
 import './Details.css';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+
+import { database } from '../../firebaseConfig';
+import { doc, deleteDoc } from 'firebase/firestore';
 
 export const Details = () => {
+    const navigate = useNavigate();
     const { bookId } = useParams();
     const { books } = useContext(BookContext);
 
     const currentBook = books.find(book => book.id === bookId);
+
+    const onDelete = async (id, e) => {
+        const confirmation = window.confirm('Are you sure you want to delete this post?');
+
+        if (confirmation) {
+            e.preventDefault();
+            navigate('/');
+            await deleteDoc(doc(database, 'books', id));
+            
+        }
+    }
 
     return (
         <section className="details__page">
@@ -25,7 +40,7 @@ export const Details = () => {
                 </article>
                 <div className="actions">
                     <Link to={`/edit/${currentBook.id}`} className="btn">Edit</Link>
-                    <a href="" className="btn">Delete</a>
+                    <a href="" className="btn" onClick={(e) => onDelete(currentBook.id, e)}>Delete</a>
                 </div>
             </div>
         </section>
