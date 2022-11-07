@@ -1,9 +1,11 @@
-import React from 'react';
 import './Dashboard.css';
-import BOOK from '../../assets/book.jpg';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { BookContext } from '../../contexts/BookContext';
 
-export const Dashboard = ({ books }) => {
-
+export const Dashboard = () => {
+  const { books } = useContext(BookContext);
+  
   return (
     <section className="dashboard">
       <h1>Dashboard</h1>
@@ -15,9 +17,9 @@ export const Dashboard = ({ books }) => {
             <p className="img">
               <img src={book.imageUrl} />
             </p>
-            <a className="btn" href="#">
+            <Link className="btn" to={`/details/${book.id}`}>
               Details
-            </a>
+            </Link>
           </li>)
           : <p className="no__books">No books in database!</p>}
       </ul>     

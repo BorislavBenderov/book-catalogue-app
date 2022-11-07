@@ -1,7 +1,8 @@
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { AuthContext } from './contexts/AuthContext';
+import { BookContext } from './contexts/BookContext';
 
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword  } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, getDocs } from 'firebase/firestore';
 import { database } from './firebaseConfig';
 
@@ -24,11 +25,11 @@ export const App = () => {
 
   useEffect(() => {
     getDocs(collectionRef)
-    .then(response => {
-      setBooks(response.docs.map(item => {
-        return {...item.data(), id: item.id};
-      }))
-    })
+      .then(response => {
+        setBooks(response.docs.map(item => {
+          return { ...item.data(), id: item.id };
+        }))
+      })
   }, [])
 
   const onLogin = (auth, email, password) => {
@@ -43,7 +44,7 @@ export const App = () => {
   }
 
   const onRegister = (auth, email, password) => {
-    createUserWithEmailAndPassword (auth, email, password)
+    createUserWithEmailAndPassword(auth, email, password)
       .then(response => {
         setLoggedUser(response.user);
         navigate('/');
@@ -57,17 +58,19 @@ export const App = () => {
     <>
       <AuthContext.Provider value={{ loggedUser, onLogin, onRegister }}>
         <Header />
-        <main className="site__content">
-          <Routes>
-            <Route path='/' element={<Dashboard books={books} />} />
-            <Route path='/login' element={<Login  />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/edit/:bookId' element={<Edit />} />
-            <Route path='/details/:bookId' element={<Details />} />
-            <Route path='/create' element={<CreateBook />} />
-            <Route path='/mybooks' element={<MyBooks />} />
-          </Routes>
-        </main>
+        <BookContext.Provider value={{ books }}>
+          <main className="site__content">
+            <Routes>
+              <Route path='/' element={<Dashboard />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/register' element={<Register />} />
+              <Route path='/edit/:bookId' element={<Edit />} />
+              <Route path='/details/:bookId' element={<Details />} />
+              <Route path='/create' element={<CreateBook />} />
+              <Route path='/mybooks' element={<MyBooks />} />
+            </Routes>
+          </main>
+        </BookContext.Provider>
         <Footer />
       </AuthContext.Provider>
     </>
