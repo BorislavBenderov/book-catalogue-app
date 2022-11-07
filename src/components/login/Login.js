@@ -6,6 +6,7 @@ import { getAuth } from "firebase/auth";
 export const Login = () => {
     const { onLogin } = useContext(AuthContext);
     const auth = getAuth();
+
     const onSubmit = (e) => {
         e.preventDefault();
 

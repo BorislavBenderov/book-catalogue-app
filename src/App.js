@@ -2,7 +2,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import { AuthContext } from './contexts/AuthContext';
 import { BookContext } from './contexts/BookContext';
 
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, setPersistence, browserSessionPersistence, getAuth } from "firebase/auth";
 import { collection, onSnapshot } from 'firebase/firestore';
 import { database } from './firebaseConfig';
 
@@ -18,8 +18,9 @@ import { Edit } from './components/edit/Edit';
 import { useEffect, useState } from 'react';
 
 export const App = () => {
+  const auth = getAuth();
   const [books, setBooks] = useState([]);
-  const [loggedUser, setLoggedUser] = useState([]);
+  const [loggedUser, setLoggedUser] = useState(null);
 
   const navigate = useNavigate();
   const collectionRef = collection(database, 'books');
@@ -30,19 +31,25 @@ export const App = () => {
         return { ...item.data(), id: item.id };
       }))
     })
-    }, []);
+  }, []);
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setLoggedUser(user);
+    }
+  })
 
   const onLogin = (auth, email, password) => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then(response => {
-        setLoggedUser(response.user);
-        navigate('/');
+    setPersistence(auth, browserSessionPersistence)
+      .then(() => {
+        signInWithEmailAndPassword(auth, email, password);
       })
-      .catch(err => {
+      .catch((err) => {
         alert(err.message);
-      })
+      });
+    navigate('/');
   }
-
+console.log(loggedUser);
   const onRegister = (auth, email, password) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(response => {
@@ -56,7 +63,7 @@ export const App = () => {
 
   return (
     <>
-      <AuthContext.Provider value={{ loggedUser, onLogin, onRegister }}>
+      <AuthContext.Provider value={{ loggedUser, onLogin, onRegister, setLoggedUser }}>
         <Header />
         <BookContext.Provider value={{ books }}>
           <main className="site__content">
