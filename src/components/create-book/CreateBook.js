@@ -2,11 +2,13 @@ import './CreateBook.css';
 import { useNavigate } from 'react-router-dom';
 
 import { collection, addDoc } from 'firebase/firestore';
-import { app, database } from '../../firebaseConfig';
+import { database } from '../../firebaseConfig';
+import { getAuth } from 'firebase/auth';
 
 export const CreateBook = () => {
     const collectionRef = collection(database, 'books');
     const navigate = useNavigate();
+    const auth = getAuth();
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -20,7 +22,8 @@ export const CreateBook = () => {
             title,
             description,
             imageUrl,
-            type
+            type,
+            ownerId: auth.currentUser.uid
         };
         
         addDoc(collectionRef, bookData)
@@ -61,7 +64,7 @@ export const CreateBook = () => {
                         <input type="text" name='type' id='type' placeholder='Type' />
                     </span>
                 </p>
-                <input class="btn" type="submit" value="Add Book"></input>
+                <input className="btn" type="submit" value="Add Book"></input>
             </form>
         </section>
     );

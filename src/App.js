@@ -33,11 +33,13 @@ export const App = () => {
     })
   }, []);
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setLoggedUser(user);
-    }
-  })
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setLoggedUser(user);
+      }
+    })
+  }, []);
 
   const onLogin = (auth, email, password) => {
     setPersistence(auth, browserSessionPersistence)
@@ -49,7 +51,7 @@ export const App = () => {
       });
     navigate('/');
   }
-console.log(loggedUser);
+
   const onRegister = (auth, email, password) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(response => {
