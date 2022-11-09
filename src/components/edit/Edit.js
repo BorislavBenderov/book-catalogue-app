@@ -79,7 +79,7 @@ export const Edit = () => {
                         <input type="text" name='type' id='type' placeholder='Type' value={values.type} onChange={changeHandler} />
                     </span>
                 </p>
-                <input class="btn" type="submit" value="Edit Book"></input>
+                <input className="btn" type="submit" value="Edit Book"></input>
             </form>
         </section>
     );

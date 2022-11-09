@@ -14,7 +14,12 @@ export const Details = () => {
     const { books } = useContext(BookContext);
     const currentBook = books.find(book => book.id === bookId);
 
-    const isOwner = currentBook.ownerId === auth.currentUser.uid;
+    let isOwner = null;
+
+    if (auth.currentUser) {
+        isOwner = currentBook.ownerId === auth.currentUser.uid;
+    }
+
 
     const onDelete = async (id, e) => {
         const confirmation = window.confirm('Are you sure you want to delete this post?');
@@ -23,7 +28,7 @@ export const Details = () => {
             e.preventDefault();
             navigate('/');
             await deleteDoc(doc(database, 'books', id));
-            
+
         }
     }
 
@@ -41,11 +46,11 @@ export const Details = () => {
                         <p>{currentBook.description}</p>
                     </div>
                 </article>
-                {isOwner 
-                ? <div className="actions">
-                    <Link to={`/edit/${currentBook.id}`} className="btn">Edit</Link>
-                    <a href="" className="btn" onClick={(e) => onDelete(currentBook.id, e)}>Delete</a>
-                </div> : ''}
+                {isOwner
+                    ? <div className="actions">
+                        <Link to={`/edit/${currentBook.id}`} className="btn">Edit</Link>
+                        <a href="" className="btn" onClick={(e) => onDelete(currentBook.id, e)}>Delete</a>
+                    </div> : ''}
             </div>
         </section>
     );

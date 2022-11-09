@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import './Register.css';
-import { app } from '../../firebaseConfig';
 import { getAuth } from "firebase/auth";
 
 export const Register = () => {

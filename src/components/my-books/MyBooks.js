@@ -1,4 +1,3 @@
-import BOOK from '../../assets/book.jpg';
 import './MyBooks.css';
 import { useContext } from 'react';
 import { BookContext } from '../../contexts/BookContext';
@@ -10,8 +9,6 @@ export const MyBooks = () => {
     const auth = getAuth();
 
     const ownerBooks = books.filter(x => x.ownerId === auth.currentUser.uid);
-    console.log(ownerBooks);
-    console.log(books);
 
     return (
         <section className="my__books">

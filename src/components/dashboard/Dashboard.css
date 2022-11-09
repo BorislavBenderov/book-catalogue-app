@@ -1,3 +1,9 @@
+.dashboard {
+    width: 100%;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
 li {
     display: inline-block;
 }
@@ -5,10 +11,8 @@ li {
 .other__books__list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-top: 10px;
-    margin-left: 200px;
-    margin-right: 200px;
 }
 
 h1 {
@@ -16,7 +20,8 @@ h1 {
 }
 
 .img img {
-    width: 50%;
+    width: 100px;
+    height: 100px;
     margin-left: auto;
     margin-right: auto;
     border-radius: 50%;
@@ -24,7 +29,6 @@ h1 {
 
 .otherBooks {
     margin: 20px 0;
-    padding: 10px;
     border: 1px solid var(--color-primary);
     border-radius: 20px;
     background-color: green;
@@ -41,4 +45,9 @@ h1 {
 
 .otherBooks .type {
     text-align: center;
+}
+
+.otherBooks a {
+    margin-bottom: 10px;
+    margin-left: 5px;
 }

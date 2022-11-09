@@ -40,7 +40,6 @@ export const Header = () => {
                 <article className="book__section__img__content">
                     <img src={BOOK1} alt="fancy book img" className='section__img' />
                 </article>
-                <h1 className='book__section__main__text'>Welcome to the world of Books</h1>
             </section>
         </header>
     );

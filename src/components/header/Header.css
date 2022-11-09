@@ -31,12 +31,3 @@
     opacity: 0.7;
     height: 700px;
 }
-
-.book__section__main__text {
-    color: var(--color-bg-variant);
-    position: absolute;
-    top: 600px;
-    margin-left: 582px;
-    
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
-}
