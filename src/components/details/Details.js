@@ -4,11 +4,11 @@ import './Details.css';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 
 import { database } from '../../firebaseConfig';
-import { getAuth } from 'firebase/auth';
 import { doc, deleteDoc } from 'firebase/firestore';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export const Details = () => {
-    const auth = getAuth();
+    const { auth } = useContext(AuthContext);
     const navigate = useNavigate();
     const { bookId } = useParams();
     const { books } = useContext(BookContext);

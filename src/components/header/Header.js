@@ -3,13 +3,12 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 import BOOK1 from '../../assets/book-main.jpg';
 import './Header.css';
-import { getAuth, signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
 
 export const Header = () => {
-    const { loggedUser, setLoggedUser } = useContext(AuthContext);
+    const { loggedUser, setLoggedUser, auth } = useContext(AuthContext);
 
     const onLogout = () => {
-        const auth = getAuth();
         signOut(auth).then(() => {
             setLoggedUser(null);
         }).catch((err) => {

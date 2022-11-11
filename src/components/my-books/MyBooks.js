@@ -1,12 +1,12 @@
 import './MyBooks.css';
 import { useContext } from 'react';
 import { BookContext } from '../../contexts/BookContext';
-import { getAuth } from 'firebase/auth';
+import { AuthContext } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 
 export const MyBooks = () => {
     const { books } = useContext(BookContext);
-    const auth = getAuth();
+    const { auth } = useContext(AuthContext);
 
     const ownerBooks = books.filter(x => x.ownerId === auth.currentUser.uid);
 

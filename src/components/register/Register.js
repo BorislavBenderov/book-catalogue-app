@@ -1,12 +1,9 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import './Register.css';
-import { getAuth } from "firebase/auth";
 
 export const Register = () => {
-    const auth = getAuth();
-
-    const { onRegister } = useContext(AuthContext);
+    const { onRegister, auth } = useContext(AuthContext);
     const onSubmit = (e) => {
         e.preventDefault();
 

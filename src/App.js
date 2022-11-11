@@ -65,7 +65,7 @@ export const App = () => {
 
   return (
     <>
-      <AuthContext.Provider value={{ loggedUser, onLogin, onRegister, setLoggedUser }}>
+      <AuthContext.Provider value={{ loggedUser, onLogin, onRegister, setLoggedUser, auth }}>
         <Header />
         <BookContext.Provider value={{ books }}>
           <main className="site__content">
